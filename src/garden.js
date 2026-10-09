@@ -6,10 +6,10 @@ const mapGroom = 'https://maps.app.goo.gl/XUN5aBas6NM2aExq6'
 const assetRoot = import.meta.env?.BASE_URL ?? './public/'
 const imageRoot = `${assetRoot}images`
 const photoRoot = `${imageRoot}/optimized`
-const backgroundImageRoot = imageRoot
+const backgroundImageRoot = new URL(`${imageRoot}/`, document.baseURI).href
 const audioRoot = `${assetRoot}audio`
 document.documentElement.style.setProperty('--couple-background', `url("${photoRoot}/HTS_8643.jpg")`)
-document.documentElement.style.setProperty('--invitation-card-bg', `url("${backgroundImageRoot}/background.jpg")`)
+document.documentElement.style.setProperty('--invitation-card-bg', `url("${backgroundImageRoot}background.jpg")`)
 
 const photos = [
   { src: `${photoRoot}/HTS_8643.jpg`, alt: 'Ảnh cưới của Phùng Thị Mỹ Tâm và Nguyễn Văn Công' },
@@ -323,7 +323,7 @@ document.querySelectorAll('.hero-photo, .closing-garden').forEach((background) =
   const overlay = isClosing
     ? 'linear-gradient(180deg, rgba(30, 43, 34, .25), rgba(25, 39, 31, .58)), '
     : ''
-  background.style.backgroundImage = `${overlay}url("${backgroundImageRoot}/HTS_8643.jpg")`
+  background.style.backgroundImage = `${overlay}url("${backgroundImageRoot}HTS_8643.jpg")`
 })
 const heroPhoto = document.querySelector('.hero-photo')
 function positionHeroPhoto() {
