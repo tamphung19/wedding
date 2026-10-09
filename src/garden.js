@@ -3,10 +3,11 @@ const groom = 'NGUYỄN VĂN CÔNG'
 const weddingDate = new Date('2026-11-08T17:00:00+07:00')
 const mapBride = 'https://maps.app.goo.gl/FeymssNYsQ5pCVof8'
 const mapGroom = 'https://maps.app.goo.gl/XUN5aBas6NM2aExq6'
-const imageRoot = window.location.protocol === 'file:' ? './public/images' : '/images'
-const photoRoot = window.location.protocol === 'file:' ? './public/images/optimized' : '/images/optimized'
-const backgroundImageRoot = window.location.protocol === 'file:' ? '../public/images' : '/images'
-const audioRoot = window.location.protocol === 'file:' ? './public/audio' : '/audio'
+const assetRoot = import.meta.env?.BASE_URL ?? './public/'
+const imageRoot = `${assetRoot}images`
+const photoRoot = `${imageRoot}/optimized`
+const backgroundImageRoot = imageRoot
+const audioRoot = `${assetRoot}audio`
 document.documentElement.style.setProperty('--couple-background', `url("${photoRoot}/HTS_8643.jpg")`)
 document.documentElement.style.setProperty('--invitation-card-bg', `url("${backgroundImageRoot}/background.jpg")`)
 
@@ -378,8 +379,6 @@ const musicToggle = document.querySelector('#musicToggle')
 const musicNotice = document.querySelector('#musicNotice')
 const musicCandidates = [
   `${audioRoot}/garden-music.mp3`,
-  './public/audio/garden-music.mp3',
-  '/audio/garden-music.mp3',
 ]
 const backgroundMusic = new Audio()
 backgroundMusic.loop = true

@@ -15,6 +15,8 @@ Tạo bản production bằng:
 npm run build
 ```
 
+Các URL tài nguyên dùng đường dẫn tương đối để hoạt động khi GitHub Pages xuất bản dự án dưới `/wedding/`. Khi xuất bản trực tiếp từ nhánh `main` và thư mục gốc, ảnh và nhạc nằm trong `public/`; sau khi build, Vite chép chúng vào thư mục gốc của `dist/`.
+
 ## Thay ảnh cưới
 
 Ảnh trong album được lấy từ `public/images/optimized/`; ảnh nền thiệp là `public/images/background.jpg`. Đường dẫn ảnh được khai báo ở đầu `src/garden.js`.
