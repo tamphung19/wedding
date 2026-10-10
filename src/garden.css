@@ -3245,10 +3245,121 @@ img[role="button"]:focus-visible {
 .invitation .closing-thanks-en { color: var(--color-text-muted) !important; }
 .invitation .copyright { color: var(--color-text-muted) !important; }
 .hero-card-photo img { transition: opacity 1s ease-in-out; }
+.wishes-wall {
+	position: relative;
+	margin: 30px 0 0;
+	padding: 28px clamp(18px, 4vw, 38px) 18px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-card);
+	background: linear-gradient(145deg, #fffdf9, #f8f1e8);
+	box-shadow: 0 10px 28px rgba(75,56,44,.045);
+	text-align: center;
+}
+.wishes-wall-label {
+	margin: 0 0 20px;
+	color: var(--color-accent);
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: .18em;
+}
+.wishes-wall-label::after {
+	display: block;
+	width: 36px;
+	height: 1px;
+	margin: 11px auto 0;
+	background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+	content: "";
+}
+.wishes-viewport {
+	width: 100%;
+	max-height: min(460px, 54svh);
+	overflow: hidden;
+	border-radius: 10px;
+	text-align: left;
+}
+.wishes-viewport:focus-visible {
+	outline: 2px solid var(--color-accent);
+	outline-offset: 4px;
+}
+.wishes-track {
+	display: flex;
+	flex-direction: column;
+	will-change: transform;
+}
+.wishes-track.is-looping {
+	animation: wishes-scroll var(--wishes-loop-duration) linear infinite;
+}
+.wishes-viewport.is-looping:hover .wishes-track,
+.wishes-viewport.is-looping:focus-within .wishes-track {
+	animation-play-state: paused;
+}
+.wishes-group {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+	padding: 2px 2px 18px;
+}
+.wish-card {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 6px;
+}
+.wish-card-name {
+	width: fit-content;
+	max-width: 85%;
+	margin: 0;
+	padding: 6px 13px;
+	border: 1px solid rgba(184,154,112,.28);
+	border-radius: 999px;
+	background: linear-gradient(135deg, #fff, #fbf5eb);
+	color: var(--color-text);
+	font: 600 14px/1.4 var(--font-body);
+	overflow-wrap: anywhere;
+	box-shadow: 0 2px 8px rgba(75,56,44,.035);
+}
+.wish-card-message {
+	width: 100%;
+	margin: 0;
+	padding: 14px 17px;
+	border: 1px solid rgba(184,154,112,.2);
+	border-left: 2px solid rgba(184,154,112,.58);
+	border-radius: 4px 12px 12px 12px;
+	background: rgba(255,255,255,.78);
+	box-shadow: 0 5px 16px rgba(75,56,44,.045);
+	color: var(--color-text);
+	font: 15px/1.75 var(--font-body);
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+.wish-empty {
+	margin: 0;
+	padding: 28px 16px;
+	border: 1px solid rgba(184,154,112,.22);
+	border-radius: 10px;
+	color: var(--color-text-muted);
+	font: italic 17px/1.7 var(--font-heading);
+	text-align: center;
+}
+@keyframes wishes-scroll {
+	to { transform: translateY(calc(-1 * var(--wishes-loop-distance))); }
+}
+.wishes-wall-count {
+	margin: 12px 0 0;
+	color: var(--color-text-muted);
+	font-size: 10px;
+	letter-spacing: .14em;
+}
+.submit-button:disabled { cursor: wait; opacity: .68; }
+@media(prefers-reduced-motion:reduce) {
+	.wishes-viewport { overflow-y: auto; }
+	.wishes-track { animation: none !important; transform: none !important; }
+	.wishes-group[aria-hidden="true"] { display: none; }
+}
 
 @media(max-width:760px) {
 	.invitation { width: 100% !important; box-shadow: none; }
-	.invitation .topbar { height: 62px; padding-inline: 18px; }
+	.invitation .topbar { height: 62px; padding-inline: 18px; 	}
 	.invitation .topnav { display: none; }
 	.invitation .topbar-date { font-size: 10px; }
 	.invitation .section-pad { padding: 56px 22px; }
@@ -3275,6 +3386,14 @@ img[role="button"]:focus-visible {
 	.wedding-countdown > i { font-size: 14px; }
 	.rsvp-card { padding: 28px 20px; }
 	.form-row { grid-template-columns: 1fr; }
+}
+@media(max-width:600px) {
+	.wishes-wall { margin-top: 24px; padding: 22px 14px 15px; }
+	.wishes-viewport { max-height: min(400px, 50svh); }
+	.wishes-wall-label { margin-bottom: 16px; }
+	.wishes-group { gap: 15px; padding: 2px 1px 15px; }
+	.wish-card-name { max-width: 92%; padding: 6px 12px; font-size: 13px; }
+	.wish-card-message { padding: 12px 13px; font-size: 14px; }
 }
 
 @media(prefers-reduced-motion:reduce) {

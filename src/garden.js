@@ -3,6 +3,7 @@ const groom = 'NGUYỄN VĂN CÔNG'
 const weddingDate = new Date('2026-11-08T10:00:00+07:00')
 const mapBride = 'https://maps.app.goo.gl/FeymssNYsQ5pCVof8'
 const mapGroom = 'https://maps.app.goo.gl/XUN5aBas6NM2aExq6'
+const wishesEndpoint = 'https://script.google.com/macros/s/AKfycbycHIbwpCjROanvHxDO4zQVRfNYIXhVA_8EI12--ULU2v0xDy9pmTYBEh9iuvPCE7diNg/exec'
 const assetRoot = import.meta.env?.BASE_URL ?? './public/'
 const imageRoot = `${assetRoot}images`
 const photoRoot = `${imageRoot}/optimized`
@@ -172,15 +173,15 @@ app.innerHTML = `
       <div class="love-timeline">
         <article class="story-item story-item-left">
           <figure class="story-photo"><img src="${photos[0].src}" alt="Ảnh kỷ niệm của Tâm và Công — dấu mốc đầu tiên" loading="lazy" decoding="async" /></figure>
-          <div class="story-copy"><p class="story-milestone">DẤU MỐC 01 <span>·</span> LẦN ĐẦU GẶP NHAU</p><p>Lần đầu gặp nhau là khi tham gia ngoại khóa cùng lớp anh đi đại học Bách Khoa, mình và anh cũng đi chung xe thứ 2 để hội ngộ với các bạn, mình say xe nên muốn nhờ anh che dùm cái vai. Từ đó anh ghét mình vì cho rằng mình vô duyên thật.</p></div>
+          <div class="story-copy"><p class="story-milestone">DẤU MỐC 01 <span>·</span> LẦN ĐẦU GẶP NHAU</p><p>Lần đầu gặp nhau là khi tham gia ngoại khóa cùng lớp anh đi Đại học Bách Khoa. Mình và anh đi chung chuyến xe thứ hai để hội ngộ với các bạn. Mình bị say xe nên muốn nhờ anh cho mình dựa một chút (anh nói anh nhớ như vậy, mình thì không nhớ gì há há). Từ đó anh ghét mình vì cho rằng mình vô duyên thật.</p></div>
         </article>
         <article class="story-item story-item-right">
           <figure class="story-photo"><img src="${photos[2].src}" alt="Ảnh kỷ niệm của Tâm và Công — dấu mốc thứ hai" loading="lazy" decoding="async" /></figure>
-          <div class="story-copy"><p class="story-milestone">DẤU MỐC 02 <span>·</span> GẦN TẾT NĂM 2018</p><p>Gần tết năm 2018 mình có nhắn tin làm quen với anh, vì nghe bạn kể anh rất thú vị. Nhưng anh không trả lời mình, sau 1 khoảng thời gian mình nhắn lại kiểu thế và từ đó anh trả lời lại và hai đứa bắt đầu nhắn tin qua lại với nhau.</p></div>
+          <div class="story-copy"><p class="story-milestone">DẤU MỐC 02 <span>·</span> GẦN TẾT NĂM 2018</p><p>Gần Tết năm 2018, mình có nhắn tin làm quen với anh vì nghe bạn kể anh rất thú vị. Nhưng anh không trả lời. Sau một khoảng thời gian, mình nhắn cho anh là "kiêu thế" sau đó anh phản hồi, rồi từ ấy chúng mình bắt đầu trò chuyện với nhau nhiều hơn.</p></div>
         </article>
         <article class="story-item story-item-left">
           <figure class="story-photo"><img src="${photos[8].src}" alt="Ảnh kỷ niệm của Tâm và Công — dấu mốc thứ ba" loading="lazy" decoding="async" /></figure>
-          <div class="story-copy"><p class="story-milestone">DẤU MỐC 03 <span>·</span> NGÀY TỎ TÌNH</p><p>Sau khi biết điểm thi đại học a mời mình xuống nhà ăn cơm, chiều hôm đó anh tỏ tình mình và chúng mình đã bên nhau được 6 năm kể từ ngày ấy. Một hành trình dài với nhiều chuyện vui buồn xảy ra và tới ngày chúng mình về chung một nhà.</p></div>
+          <div class="story-copy"><p class="story-milestone">DẤU MỐC 03 <span>·</span> NGÀY TỎ TÌNH</p><p>Sau khi biết điểm thi đại học, anh mời mình xuống nhà ăn cơm. Chiều tối hôm ấy, anh hẹn mình đi uống nước và nói chuyện. Sau này anh mới kể lại, lúc đó anh hẹn đi vì muốn nhìn mình kỹ hơn, bởi anh sợ nếu tỏ tình mà bị từ chối thì sẽ không còn cơ hội gặp lại nữa. Vào một ngày mùa thu tháng 10, anh tỏ tình với mình qua tin nhắn. Ban đầu mình chỉ nghĩ anh nói đùa, nhưng hóa ra lại là thật. Đêm đó, chúng mình đã trò chuyện suốt 4 tiếng đồng hồ từ đêm tới sáng, để rồi buổi gặp trực tiếp sau đó đầy ngại ngùng. Từ ngày đặc biệt ấy đến nay đã tròn 6 năm — một hành trình dài với bao vui buồn, thăng trầm, cho tới ngày chúng mình chính thức về chung một nhà.</p></div>
         </article>
       </div>
     </section>
@@ -286,12 +287,21 @@ app.innerHTML = `
             <label class="attendance-option"><input type="radio" name="attendance" value="yes" required /><span>💚 &nbsp; Tôi chắc chắn sẽ tham dự</span></label>
             <label class="attendance-option"><input type="radio" name="attendance" value="no" /><span>🌿 &nbsp; Tôi rất tiếc không thể tham dự</span></label>
           </fieldset>
-          <div class="form-row"><label>Họ và tên<input name="guestName" autocomplete="name" placeholder="Tên của bạn" required /></label><label>Số người tham dự<select name="guestCount"><option value="1">01 người</option><option value="2">02 người</option><option value="3">03 người</option><option value="4">04 người</option><option value="5">05 người</option></select></label></div>
-          <label class="message-label">Lời chúc dành cho cô dâu chú rể<textarea name="wish" rows="3" placeholder="Gửi đôi lời thương mến..."></textarea></label>
+          <div class="form-row"><label>Họ và tên<input name="guestName" autocomplete="name" maxlength="80" placeholder="Tên của bạn" required /></label><label>Số người tham dự<select name="guestCount"><option value="1">01 người</option><option value="2">02 người</option><option value="3">03 người</option><option value="4">04 người</option><option value="5">05 người</option></select></label></div>
+          <label class="message-label">Lời chúc dành cho cô dâu chú rể<textarea name="wish" rows="3" maxlength="500" placeholder="Gửi đôi lời thương mến..."></textarea></label>
           <button class="submit-button" type="submit">XÁC NHẬN THAM DỰ <span>↗</span></button>
-          <p class="form-note">Phản hồi được lưu trên thiết bị này. Hãy kết nối form với dịch vụ RSVP để nhận câu trả lời của khách mời.</p>
+          <p class="form-note">Lời chúc sẽ xuất hiện ở đây sau khi kết nối Google Sheets. Vui lòng không ghi thông tin riêng tư.</p>
           <p class="form-feedback" id="formFeedback" role="status" hidden></p>
         </form>
+        <section class="wishes-wall" aria-labelledby="wishesWallTitle">
+          <p class="wishes-wall-label" id="wishesWallTitle">LỜI CHÚC TỪ KHÁCH MỜI</p>
+            <div class="wishes-viewport" id="wishesViewport" role="region" aria-label="Danh sách lời chúc của khách mời" tabindex="0">
+              <div class="wishes-track" id="wishesTrack" aria-live="off">
+                <div class="wishes-group" id="wishesGroup" role="list"></div>
+              </div>
+            </div>
+            <p class="wishes-wall-count" id="wishesWallCount" aria-live="polite"></p>
+          </section>
       </div>
     </section>
 
@@ -611,17 +621,206 @@ lightbox.addEventListener('touchend', (event) => {
 
 const rsvpForm = document.querySelector('#rsvpForm')
 const formFeedback = document.querySelector('#formFeedback')
-rsvpForm.addEventListener('submit', (event) => {
-  event.preventDefault()
-  const data = Object.fromEntries(new FormData(rsvpForm).entries())
-  try {
-    const saved = JSON.parse(localStorage.getItem('wedding-rsvp-responses') || '[]')
-    saved.push({ ...data, submittedAt: new Date().toISOString() })
-    localStorage.setItem('wedding-rsvp-responses', JSON.stringify(saved))
-    formFeedback.textContent = `Cảm ơn ${data.guestName} đã gửi phản hồi. Thông tin đang được lưu trên thiết bị này.`
-  } catch {
-    formFeedback.textContent = 'Cảm ơn bạn đã phản hồi. Hãy kết nối form với dịch vụ RSVP để gửi thông tin.'
+const wishesViewport = document.querySelector('#wishesViewport')
+const wishesTrack = document.querySelector('#wishesTrack')
+const wishesGroup = document.querySelector('#wishesGroup')
+const wishesWallCount = document.querySelector('#wishesWallCount')
+const submitButton = rsvpForm.querySelector('button[type="submit"]')
+let sharedWishes = []
+let wishesLoadPromise = null
+
+function createWishCard(wish) {
+  const card = document.createElement('article')
+  card.className = 'wish-card'
+  card.setAttribute('role', 'listitem')
+
+  const name = document.createElement('p')
+  name.className = 'wish-card-name'
+  name.textContent = wish.name
+
+  const message = document.createElement('p')
+  message.className = 'wish-card-message'
+  message.textContent = wish.wish
+
+  card.append(name, message)
+  return card
+}
+
+function renderWishes() {
+  const previousAnimation = wishesTrack.getAnimations().find((animation) => animation.animationName === 'wishes-scroll')
+  const previousDuration = Number.parseFloat(getComputedStyle(wishesTrack).animationDuration) * 1000
+  const previousProgress = previousAnimation && previousDuration > 0
+    ? (Number(previousAnimation.currentTime) % previousDuration) / previousDuration
+    : 0
+
+  wishesTrack.classList.remove('is-looping')
+  wishesTrack.style.removeProperty('--wishes-loop-distance')
+  wishesTrack.style.removeProperty('--wishes-loop-duration')
+  wishesTrack.replaceChildren()
+  wishesGroup.replaceChildren()
+  wishesGroup.removeAttribute('aria-hidden')
+  wishesViewport.classList.remove('is-looping')
+
+  if (!sharedWishes.length) {
+    const emptyMessage = document.createElement('p')
+    emptyMessage.className = 'wish-empty'
+    emptyMessage.textContent = wishesEndpoint
+      ? 'Hãy là người đầu tiên gửi lời chúc đến chúng mình nhé!'
+      : 'Lời chúc sẽ xuất hiện ở đây sau khi kết nối Google Sheets.'
+    wishesGroup.append(emptyMessage)
+    wishesTrack.append(wishesGroup)
+    wishesWallCount.textContent = ''
+    return
   }
+
+  sharedWishes.forEach((wish) => wishesGroup.append(createWishCard(wish)))
+  wishesTrack.append(wishesGroup)
+  wishesWallCount.textContent = `${sharedWishes.length} ${sharedWishes.length === 1 ? 'lời chúc' : 'lời chúc'} từ khách mời`
+
+  if (sharedWishes.length < 3 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const duplicateGroup = wishesGroup.cloneNode(true)
+  duplicateGroup.removeAttribute('id')
+  duplicateGroup.setAttribute('aria-hidden', 'true')
+  duplicateGroup.querySelectorAll('[id]').forEach((element) => element.removeAttribute('id'))
+  wishesTrack.append(duplicateGroup)
+
+  requestAnimationFrame(() => {
+    const loopDistance = wishesGroup.getBoundingClientRect().height
+    if (!loopDistance) return
+
+    wishesTrack.style.setProperty('--wishes-loop-distance', `${loopDistance}px`)
+    wishesTrack.style.setProperty('--wishes-loop-duration', `${Math.max(48, loopDistance / 22)}s`)
+    wishesViewport.classList.add('is-looping')
+    wishesTrack.classList.add('is-looping')
+    if (previousProgress) {
+      requestAnimationFrame(() => {
+        const animation = wishesTrack.getAnimations().find((entry) => entry.animationName === 'wishes-scroll')
+        const duration = Number.parseFloat(getComputedStyle(wishesTrack).animationDuration) * 1000
+        if (animation && duration > 0) animation.currentTime = previousProgress * duration
+      })
+    }
+  })
+}
+
+function loadSharedWishes() {
+  if (!wishesEndpoint) return Promise.resolve(null)
+
+  return new Promise((resolve, reject) => {
+    const callbackName = `wishesCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`
+    const script = document.createElement('script')
+    const timeout = window.setTimeout(() => {
+      cleanup()
+      reject(new Error('Timed out while loading shared wishes'))
+    }, 12000)
+    const cleanup = () => {
+      window.clearTimeout(timeout)
+      delete window[callbackName]
+      script.remove()
+    }
+    window[callbackName] = (response) => {
+      cleanup()
+      if (!response?.ok || !Array.isArray(response.wishes)) {
+        reject(new Error(response?.error || 'The wishes service returned an invalid response'))
+        return
+      }
+      resolve(response.wishes)
+    }
+    script.onerror = () => {
+      cleanup()
+      reject(new Error('Unable to load shared wishes'))
+    }
+    const separator = wishesEndpoint.includes('?') ? '&' : '?'
+    script.src = `${wishesEndpoint}${separator}action=list&callback=${callbackName}&_=${Date.now()}`
+    document.head.append(script)
+  })
+}
+
+function refreshSharedWishes() {
+  if (!wishesEndpoint) return Promise.resolve(null)
+  if (wishesLoadPromise) return wishesLoadPromise
+
+  wishesLoadPromise = loadSharedWishes()
+    .then((loadedWishes) => {
+      sharedWishes = loadedWishes.filter((wish) => typeof wish?.name === 'string' && typeof wish?.wish === 'string' && wish.wish.trim())
+      renderWishes()
+      return sharedWishes
+    })
+    .finally(() => { wishesLoadPromise = null })
+  return wishesLoadPromise
+}
+
+renderWishes()
+if (wishesEndpoint) {
+  refreshSharedWishes().catch((error) => {
+    console.error('Unable to load shared wedding wishes:', error)
+    const errorMessage = document.createElement('p')
+    errorMessage.className = 'wish-empty'
+    errorMessage.textContent = 'Chưa tải được lời chúc. Hệ thống sẽ thử lại sau.'
+    wishesGroup.replaceChildren(errorMessage)
+  })
+  window.setInterval(() => {
+    refreshSharedWishes().catch((error) => console.error('Unable to refresh shared wedding wishes:', error))
+  }, 30000)
+}
+
+rsvpForm.addEventListener('submit', async (event) => {
+  event.preventDefault()
+  if (!wishesEndpoint) {
+    formFeedback.textContent = 'Chưa kết nối Google Sheets nên phản hồi chưa được gửi. Hãy cấu hình URL Web App trước khi khách xác nhận.'
+    formFeedback.hidden = false
+    return
+  }
+
+  const formData = new FormData(rsvpForm)
+  const data = {
+    name: String(formData.get('guestName') || '').trim(),
+    attendance: String(formData.get('attendance') || ''),
+    guestCount: Number(formData.get('guestCount') || 1),
+    wish: String(formData.get('wish') || '').trim(),
+  }
+  if (!data.name || data.name.length > 80 || data.wish.length > 500 || !['yes', 'no'].includes(data.attendance) || data.guestCount < 1 || data.guestCount > 5) {
+    formFeedback.textContent = 'Vui lòng kiểm tra tên, lựa chọn tham dự và nội dung lời chúc (tối đa 500 ký tự).'
+    formFeedback.hidden = false
+    return
+  }
+
+  submitButton.disabled = true
+  formFeedback.textContent = 'Đang gửi phản hồi và lời chúc...'
   formFeedback.hidden = false
-  rsvpForm.reset()
+  try {
+    await fetch(wishesEndpoint, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+      body: JSON.stringify(data),
+    })
+    formFeedback.textContent = 'Đã gửi yêu cầu. Đang chờ Google Sheets xác nhận...'
+    if (data.wish) {
+      let confirmed = false
+      for (let attempt = 0; attempt < 3; attempt += 1) {
+        await new Promise((resolve) => window.setTimeout(resolve, 1800))
+        try {
+          const latestWishes = await refreshSharedWishes()
+          if (latestWishes?.some((wish) => wish.name === data.name && wish.wish === data.wish)) {
+            confirmed = true
+            break
+          }
+        } catch (error) {
+          console.error('Unable to confirm wedding wish submission:', error)
+        }
+      }
+      formFeedback.textContent = confirmed
+        ? `Cảm ơn ${data.name}! Lời chúc của bạn đã được lưu và sẽ lần lượt hiển thị cho mọi người.`
+        : 'Đã gửi yêu cầu nhưng chưa xác nhận được lời chúc. Hãy kiểm tra lại bảng lời chúc sau ít phút trước khi gửi lần nữa.'
+    } else {
+      formFeedback.textContent = 'Đã gửi yêu cầu xác nhận tham dự. Do giới hạn bảo mật của Google, thiệp không thể đọc lại phản hồi này.'
+    }
+    if (!formFeedback.textContent.startsWith('Đã gửi yêu cầu nhưng')) rsvpForm.reset()
+  } catch (error) {
+    console.error('Unable to submit wedding RSVP:', error)
+    formFeedback.textContent = 'Không gửi được phản hồi. Vui lòng kiểm tra kết nối mạng rồi thử lại.'
+  } finally {
+    submitButton.disabled = false
+  }
 })
