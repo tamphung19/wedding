@@ -1,6 +1,6 @@
 const bride = 'PHÙNG THỊ MỸ TÂM'
 const groom = 'NGUYỄN VĂN CÔNG'
-const weddingDate = new Date('2026-11-08T17:00:00+07:00')
+const weddingDate = new Date('2026-11-08T10:00:00+07:00')
 const mapBride = 'https://maps.app.goo.gl/FeymssNYsQ5pCVof8'
 const mapGroom = 'https://maps.app.goo.gl/XUN5aBas6NM2aExq6'
 const imageRoot = window.location.protocol === 'file:' ? './public/images' : '/images'
@@ -78,7 +78,7 @@ app.innerHTML = `
           <div><strong data-unit="seconds">00</strong><span>GIÂY</span></div>
         </div>
         <p class="countdown-message" id="countdownMessage" hidden>HÔM NAY LÀ NGÀY HẠNH PHÚC CỦA CHÚNG MÌNH ❤️</p>
-        <p class="countdown-footnote">08 THÁNG 11, 2026 <span>·</span> 17:00 (GMT+7)</p>
+        <p class="countdown-footnote">08 THÁNG 11, 2026 <span>·</span> 10:00 (GMT+7)</p>
       </div>
     </section>
 
@@ -89,7 +89,7 @@ app.innerHTML = `
         <p class="eyebrow">PLEASE JOIN US TO CELEBRATE</p>
         <p class="big-date">08 <i>·</i> 11 <i>·</i> 2026</p>
         <span class="gold-rule"></span>
-        <p class="party-time">TIỆC CƯỚI BẮT ĐẦU LÚC <strong>17:00</strong></p>
+        <p class="party-time">TIỆC CƯỚI BẮT ĐẦU LÚC <strong>10:00</strong></p>
         <p class="date-note">Chủ Nhật <span>·</span> Ngày 08 tháng 11 năm 2026</p>
         <a class="text-link" href="#venues">Xem địa điểm <span>↓</span></a>
       </div>

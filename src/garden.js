@@ -1,6 +1,6 @@
 const bride = 'PHÙNG THỊ MỸ TÂM'
 const groom = 'NGUYỄN VĂN CÔNG'
-const weddingDate = new Date('2026-11-08T17:00:00+07:00')
+const weddingDate = new Date('2026-11-08T10:00:00+07:00')
 const mapBride = 'https://maps.app.goo.gl/FeymssNYsQ5pCVof8'
 const mapGroom = 'https://maps.app.goo.gl/XUN5aBas6NM2aExq6'
 const assetRoot = import.meta.env?.BASE_URL ?? './public/'
@@ -123,7 +123,7 @@ app.innerHTML = `
         <h1 class="invitation-names">${bride}<span><i>♥</i></span>${groom}</h1>
         <div class="invitation-date"><span></span><time datetime="2026-11-08">08.11.2026</time><span></span></div>
         <p class="invitation-greeting">Trân trọng kính mời quý khách</p>
-        <p class="invitation-time"><span aria-hidden="true">▢</span> 08.11.2026 <i>·</i> 17:00</p>
+        <p class="invitation-time"><span aria-hidden="true">▢</span> 08.11.2026 <i>·</i> 10:00</p>
       </div>
       <div class="invitation-floral invitation-floral-bottom">${invitationBotanical}</div>
     </div>
@@ -152,7 +152,7 @@ app.innerHTML = `
           <h1>${bride}<span>♥</span>${groom}</h1>
           <div class="hero-card-date"><span></span><time datetime="2026-11-08">08.11.2026</time><span></span></div>
           <p class="hero-card-greeting">Trân trọng kính mời quý khách<br />đến chung vui trong ngày hạnh phúc</p>
-          <p class="hero-card-time"><span aria-hidden="true">▢</span> CHỦ NHẬT <i>·</i> 17:00</p>
+          <p class="hero-card-time"><span aria-hidden="true">▢</span> CHỦ NHẬT <i>·</i> 10:00</p>
           <a class="hero-card-link" href="#couple" aria-label="Cuộn xuống để xem chi tiết thư mời">Cuộn xuống để xem chi tiết thư mời <span class="hero-card-arrow" aria-hidden="true">∨</span></a>
         </div>
         <div class="hero-card-floral hero-card-floral-bottom">${invitationBotanical}</div>
@@ -218,7 +218,7 @@ app.innerHTML = `
           <p class="countdown-overline">ĐẾM NGÀY ĐẾN LỄ CƯỚI</p>
           <p class="script-note countdown-script">Hạnh phúc bắt đầu hôm nay</p>
           <h2 id="weddingCountdownTitle">${bride}<span><i>♥</i></span>${groom}</h2>
-          <p class="countdown-date-line">${weddingWeekday.toLocaleUpperCase('vi-VN')} <i>·</i> ${weddingDateLabel} <i>·</i> 17:00</p>
+          <p class="countdown-date-line">${weddingWeekday.toLocaleUpperCase('vi-VN')} <i>·</i> ${weddingDateLabel} <i>·</i> 10:00</p>
           <p class="countdown-day-number" id="countdownDayNumber">CÒN <span>000</span> NGÀY</p>
           <div class="countdown wedding-countdown" id="countdown" aria-live="off">
             <div><strong data-unit="days">00</strong><span>NGÀY</span></div><i>:</i>
@@ -242,7 +242,7 @@ app.innerHTML = `
           <div class="wedding-events" aria-label="Lịch trình ngày cưới">
             <p class="events-heading">NGÀY HẠNH PHÚC</p>
             <div class="wedding-event"><span class="event-dot" aria-hidden="true"></span><p><strong>${weddingShortDate}</strong><span>${weddingWeekday} · Lễ thành hôn</span></p><time datetime="${weddingDate.toISOString().slice(0, 10)}">${weddingDateLabel}</time></div>
-            <div class="wedding-event"><span class="event-dot" aria-hidden="true"></span><p><strong>${weddingShortDate}</strong><span>${weddingWeekday} · Tiệc cưới</span></p><time datetime="${weddingDate.toISOString()}">17:00</time></div>
+            <div class="wedding-event"><span class="event-dot" aria-hidden="true"></span><p><strong>${weddingShortDate}</strong><span>${weddingWeekday} · Tiệc cưới</span></p><time datetime="${weddingDate.toISOString()}">10:00</time></div>
           </div>
           <a class="calendar-map-link" href="#venues">XEM ĐỊA ĐIỂM <span>↓</span></a>
         </article>
@@ -552,6 +552,7 @@ function showPhoto(index) {
   lightboxImage.src = photos[activePhoto].src
   lightboxImage.alt = photos[activePhoto].alt
   lightboxCaption.textContent = `${String(activePhoto + 1).padStart(2, '0')} / ${String(photos.length).padStart(2, '0')}`
+  lightbox.classList.remove('lightbox-single', 'lightbox-qr')
 }
 document.querySelectorAll('.gallery-photo').forEach((button) => button.addEventListener('click', () => {
   const image = button.querySelector('img')
@@ -559,6 +560,26 @@ document.querySelectorAll('.gallery-photo').forEach((button) => button.addEventL
   showPhoto(Number(button.dataset.photoIndex))
   lightbox.showModal()
 }))
+function showStandalonePhoto(image) {
+  if (!image.naturalWidth) return
+  lightboxImage.src = image.currentSrc || image.src
+  lightboxImage.alt = image.alt
+  lightboxCaption.textContent = image.alt
+  lightbox.classList.add('lightbox-single')
+  lightbox.showModal()
+}
+app.querySelectorAll('img').forEach((image) => {
+  if (image.closest('button, a, [aria-hidden="true"], .lightbox')) return
+  image.tabIndex = 0
+  image.setAttribute('role', 'button')
+  image.setAttribute('aria-label', `Phóng to ảnh: ${image.alt}`)
+  image.addEventListener('click', () => showStandalonePhoto(image))
+  image.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    event.preventDefault()
+    showStandalonePhoto(image)
+  })
+})
 document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close())
 document.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(activePhoto - 1))
 document.querySelector('.lightbox-next').addEventListener('click', () => showPhoto(activePhoto + 1))
@@ -571,7 +592,7 @@ document.querySelectorAll('.qr-image-frame').forEach((button) => button.addEvent
   lightbox.classList.add('lightbox-qr')
   lightbox.showModal()
 }))
-lightbox.addEventListener('close', () => lightbox.classList.remove('lightbox-qr'))
+lightbox.addEventListener('close', () => lightbox.classList.remove('lightbox-qr', 'lightbox-single'))
 lightbox.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close() })
 document.addEventListener('keydown', (event) => {
   if (!lightbox.open || lightbox.classList.contains('lightbox-qr')) return
