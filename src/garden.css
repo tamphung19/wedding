@@ -3202,7 +3202,8 @@ body { overflow-x: hidden; }
 .lightbox-prev,
 .lightbox-next { z-index: 2; }
 .lightbox-image { pointer-events: none; }
-img[role="button"] { cursor: zoom-in; }
+img[role="button"],
+.hero-card-photo img { cursor: zoom-in; }
 img[role="button"]:focus-visible {
 	outline: 2px solid var(--color-accent);
 	outline-offset: 4px;

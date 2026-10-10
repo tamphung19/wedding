@@ -146,7 +146,7 @@ app.innerHTML = `
           <p class="hero-card-kicker">THƯ MỜI ĐÁM CƯỚI</p>
           <figure class="hero-card-photo">
             <img class="hero-card-photo-first is-active" src="${photoRoot}/HTS_9004.jpg" alt="Ảnh cưới của Phùng Thị Mỹ Tâm và Nguyễn Văn Công" decoding="async" />
-            <img class="hero-card-photo-second" src="${photoRoot}/HTS_8814.jpg" alt="" aria-hidden="true" decoding="async" />
+            <img class="hero-card-photo-second" src="${photoRoot}/HTS_8814.jpg" alt="Khoảnh khắc ngày cưới của Tâm và Công bên bó hoa cưới" aria-hidden="true" decoding="async" />
           </figure>
           <p class="hero-card-script">Công & Tâm</p>
           <h1>${bride}<span>♥</span>${groom}</h1>
@@ -569,16 +569,18 @@ function showStandalonePhoto(image) {
   lightbox.showModal()
 }
 app.querySelectorAll('img').forEach((image) => {
-  if (image.closest('button, a, [aria-hidden="true"], .lightbox')) return
-  image.tabIndex = 0
-  image.setAttribute('role', 'button')
-  image.setAttribute('aria-label', `Phóng to ảnh: ${image.alt}`)
+  if (image.closest('button, a, .lightbox')) return
+  if (image.getAttribute('aria-hidden') !== 'true') {
+    image.tabIndex = 0
+    image.setAttribute('role', 'button')
+    image.setAttribute('aria-label', `Phóng to ảnh: ${image.alt}`)
+    image.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return
+      event.preventDefault()
+      showStandalonePhoto(image)
+    })
+  }
   image.addEventListener('click', () => showStandalonePhoto(image))
-  image.addEventListener('keydown', (event) => {
-    if (event.key !== 'Enter' && event.key !== ' ') return
-    event.preventDefault()
-    showStandalonePhoto(image)
-  })
 })
 document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close())
 document.querySelector('.lightbox-prev').addEventListener('click', () => showPhoto(activePhoto - 1))
@@ -595,14 +597,14 @@ document.querySelectorAll('.qr-image-frame').forEach((button) => button.addEvent
 lightbox.addEventListener('close', () => lightbox.classList.remove('lightbox-qr', 'lightbox-single'))
 lightbox.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close() })
 document.addEventListener('keydown', (event) => {
-  if (!lightbox.open || lightbox.classList.contains('lightbox-qr')) return
+  if (!lightbox.open || lightbox.classList.contains('lightbox-qr') || lightbox.classList.contains('lightbox-single')) return
   if (event.key === 'ArrowLeft') showPhoto(activePhoto - 1)
   if (event.key === 'ArrowRight') showPhoto(activePhoto + 1)
 })
 let touchStartX = 0
 lightbox.addEventListener('touchstart', (event) => { touchStartX = event.changedTouches[0].screenX }, { passive: true })
 lightbox.addEventListener('touchend', (event) => {
-  if (lightbox.classList.contains('lightbox-qr')) return
+  if (lightbox.classList.contains('lightbox-qr') || lightbox.classList.contains('lightbox-single')) return
   const delta = event.changedTouches[0].screenX - touchStartX
   if (Math.abs(delta) > 45) showPhoto(activePhoto + (delta < 0 ? 1 : -1))
 }, { passive: true })
