@@ -628,6 +628,8 @@ const wishesWallCount = document.querySelector('#wishesWallCount')
 const submitButton = rsvpForm.querySelector('button[type="submit"]')
 let sharedWishes = []
 let wishesLoadPromise = null
+let wishesLoaded = false
+let wishesLoadFailed = false
 
 function createWishCard(wish) {
   const card = document.createElement('article')
@@ -664,9 +666,13 @@ function renderWishes() {
   if (!sharedWishes.length) {
     const emptyMessage = document.createElement('p')
     emptyMessage.className = 'wish-empty'
-    emptyMessage.textContent = wishesEndpoint
-      ? 'Hãy là người đầu tiên gửi lời chúc đến chúng mình nhé!'
-      : 'Lời chúc sẽ xuất hiện ở đây sau khi kết nối Google Sheets.'
+    emptyMessage.textContent = wishesLoadFailed
+      ? 'Chưa tải được lời chúc. Hệ thống sẽ thử lại sau.'
+      : !wishesLoaded && wishesEndpoint
+        ? 'Đang tải lời chúc...'
+        : wishesEndpoint
+          ? 'Hãy là người đầu tiên gửi lời chúc đến chúng mình nhé!'
+          : 'Lời chúc sẽ xuất hiện ở đây sau khi kết nối Google Sheets.'
     wishesGroup.append(emptyMessage)
     wishesTrack.append(wishesGroup)
     wishesWallCount.textContent = ''
@@ -794,6 +800,8 @@ function refreshSharedWishes() {
   wishesLoadPromise = loadSharedWishes()
     .then((loadedWishes) => {
       sharedWishes = loadedWishes.filter((wish) => typeof wish?.name === 'string' && typeof wish?.wish === 'string' && wish.wish.trim())
+      wishesLoaded = true
+      wishesLoadFailed = false
       renderWishes()
       return sharedWishes
     })
@@ -805,10 +813,8 @@ renderWishes()
 if (wishesEndpoint) {
   refreshSharedWishes().catch((error) => {
     console.error('Unable to load shared wedding wishes:', error)
-    const errorMessage = document.createElement('p')
-    errorMessage.className = 'wish-empty'
-    errorMessage.textContent = 'Chưa tải được lời chúc. Hệ thống sẽ thử lại sau.'
-    wishesGroup.replaceChildren(errorMessage)
+    wishesLoadFailed = true
+    renderWishes()
   })
   window.setInterval(() => {
     refreshSharedWishes().catch((error) => console.error('Unable to refresh shared wedding wishes:', error))
