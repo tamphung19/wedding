@@ -312,7 +312,7 @@ app.innerHTML = `
       <p class="gift-copy">Một lời chúc của bạn sẽ là món quà thật đẹp trong ngày vui.<br />Quét mã QR tương ứng để gửi lời chúc mừng.</p>
       <div class="qr-grid">
         <article class="qr-card"><p class="qr-owner">CÔ DÂU</p><button class="qr-image-frame bride-qr-frame" type="button" data-qr-src="${imageRoot}/tam_qr.jpg" data-qr-alt="Mã QR của cô dâu Phùng Thị Mỹ Tâm" aria-label="Phóng to mã QR của cô dâu"><img src="${imageRoot}/tam_qr.jpg" alt="Mã QR của cô dâu Phùng Thị Mỹ Tâm" loading="lazy" /></button><strong>${bride}</strong><span>Chạm vào mã QR để phóng to</span></article>
-        <article class="qr-card"><p class="qr-owner">CHÚ RỂ</p><button class="qr-image-frame groom-qr-frame" type="button" data-qr-src="${imageRoot}/cong_qr.jpg" data-qr-alt="Mã QR của chú rể Nguyễn Văn Công" aria-label="Phóng to mã QR của chú rể"><img src="${imageRoot}/cong_qr.jpg" alt="Mã QR của chú rể Nguyễn Văn Công" loading="lazy" /></button><strong>${groom}</strong><span>Chạm vào mã QR để phóng to</span></article>
+        <article class="qr-card"><p class="qr-owner">CHÚ RỂ</p><button class="qr-image-frame groom-qr-frame" type="button" data-qr-src="${imageRoot}/qrcong.jpg" data-qr-alt="Mã QR của chú rể Nguyễn Văn Công" aria-label="Phóng to mã QR của chú rể"><img src="${imageRoot}/qrcong.jpg" alt="Mã QR của chú rể Nguyễn Văn Công" loading="lazy" /></button><strong>${groom}</strong><span>Chạm vào mã QR để phóng to</span></article>
       </div>
     </section>
 

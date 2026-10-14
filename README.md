@@ -23,7 +23,7 @@ Các URL tài nguyên dùng đường dẫn tương đối để hoạt động 
 
 ## QR và RSVP
 
-Hai mã QR được đặt trong `public/images/tam_qr.jpg` (cô dâu) và `public/images/cong_qr.jpg` (chú rể). RSVP và lời chúc dùng Google Sheets sau khi cấu hình Web App theo hướng dẫn dưới đây.
+Hai mã QR được đặt trong `public/images/tam_qr.jpg` (cô dâu) và `public/images/qrcong.jpg` (chú rể). RSVP và lời chúc dùng Google Sheets sau khi cấu hình Web App theo hướng dẫn dưới đây.
 
 ### Kết nối Google Sheets để chia sẻ lời chúc
 
