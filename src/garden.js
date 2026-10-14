@@ -278,7 +278,7 @@ app.innerHTML = `
 
     <section class="rsvp-section section-pad reveal" id="rsvp">
       <div class="rsvp-card">
-        <div class="section-label"><span>05</span> XÁC NHẬN THAM DỰ</div>
+        <div class="section-label"><span>05</span> GỬI LỜI CHÚC</div>
         <p class="script-note">Có bạn, ngày vui thêm trọn vẹn</p>
         <h2>Bạn Sẽ Đến Chung Vui Chứ?</h2>
         <p class="rsvp-intro">Cho chúng mình biết nhé — chúng mình mong được đón bạn.</p>
@@ -289,7 +289,7 @@ app.innerHTML = `
           </fieldset>
           <div class="form-row"><label>Họ và tên<input name="guestName" autocomplete="name" maxlength="80" placeholder="Tên của bạn" required /></label><label>Số người tham dự<select name="guestCount"><option value="1">01 người</option><option value="2">02 người</option><option value="3">03 người</option><option value="4">04 người</option><option value="5">05 người</option></select></label></div>
           <label class="message-label">Lời chúc dành cho cô dâu chú rể<textarea name="wish" rows="3" maxlength="500" placeholder="Gửi đôi lời thương mến..."></textarea></label>
-          <button class="submit-button" type="submit">XÁC NHẬN THAM DỰ <span>↗</span></button>
+          <button class="submit-button" type="submit"><svg class="submit-button-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 2.5 14 21.2c-.4 1-1.8 1-2.2 0l-3.1-7.1-7.1-3.1c-1-.4-1-1.8 0-2.2L21.5 2.5ZM8.7 13.3l5.4-5.4" /></svg><span>Gửi lời chúc</span></button>
           <p class="form-note">Lời chúc sẽ xuất hiện ở đây sau khi kết nối Google Sheets. Vui lòng không ghi thông tin riêng tư.</p>
           <p class="form-feedback" id="formFeedback" role="status" hidden></p>
         </form>
@@ -702,6 +702,57 @@ function renderWishes() {
     }
   })
 }
+
+let wishesDrag = null
+
+wishesViewport.addEventListener('pointerdown', (event) => {
+  if (event.pointerType !== 'mouse' || event.button !== 0) return
+  const bounds = wishesViewport.getBoundingClientRect()
+  if (event.clientX >= bounds.right - 14) return
+
+  if (wishesViewport.classList.contains('is-looping')) {
+    const animation = wishesTrack.getAnimations().find((entry) => entry.animationName === 'wishes-scroll')
+    if (!animation) return
+    wishesDrag = { mode: 'animation', startY: event.clientY, startTime: Number(animation.currentTime) || 0 }
+  } else {
+    if (wishesViewport.scrollHeight <= wishesViewport.clientHeight) return
+    wishesDrag = { mode: 'scroll', startY: event.clientY, startScrollTop: wishesViewport.scrollTop }
+  }
+
+  event.preventDefault()
+  wishesViewport.classList.add('is-dragging')
+})
+
+window.addEventListener('pointermove', (event) => {
+  if (!wishesDrag) return
+  if (wishesDrag.mode === 'scroll') {
+    wishesViewport.scrollTop = Math.max(0, wishesDrag.startScrollTop + wishesDrag.startY - event.clientY)
+    return
+  }
+
+  const animation = wishesTrack.getAnimations().find((entry) => entry.animationName === 'wishes-scroll')
+  if (!animation) return
+
+  animation.currentTime = Math.max(0, wishesDrag.startTime + (wishesDrag.startY - event.clientY) * 1000 / 22)
+})
+
+window.addEventListener('pointerup', () => {
+  if (!wishesDrag) return
+  wishesDrag = null
+  wishesViewport.classList.remove('is-dragging')
+})
+
+wishesViewport.addEventListener('pointerleave', () => {
+  if (wishesDrag || !wishesViewport.scrollTop) return
+
+  const animation = wishesTrack.getAnimations().find((entry) => entry.animationName === 'wishes-scroll')
+  const duration = Number.parseFloat(getComputedStyle(wishesTrack).animationDuration) * 1000
+  const distance = Number.parseFloat(wishesTrack.style.getPropertyValue('--wishes-loop-distance'))
+  if (!animation || !duration || !distance) return
+
+  animation.currentTime = Number(animation.currentTime) + (wishesViewport.scrollTop / distance) * duration
+  wishesViewport.scrollTop = 0
+})
 
 function loadSharedWishes() {
   if (!wishesEndpoint) return Promise.resolve(null)

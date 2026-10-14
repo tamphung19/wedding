@@ -3277,6 +3277,17 @@ img[role="button"]:focus-visible {
 	border-radius: 10px;
 	text-align: left;
 }
+.wishes-viewport.is-looping { cursor: grab; }
+.wishes-viewport.is-looping.is-dragging {
+	cursor: grabbing;
+	user-select: none;
+}
+.wishes-viewport:hover { overflow-y: auto; }
+.wishes-viewport.is-looping::-webkit-scrollbar { width: 5px; }
+.wishes-viewport.is-looping::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background: rgba(184,154,112,.5);
+}
 .wishes-viewport:focus-visible {
 	outline: 2px solid var(--color-accent);
 	outline-offset: 4px;
@@ -3349,6 +3360,36 @@ img[role="button"]:focus-visible {
 	color: var(--color-text-muted);
 	font-size: 10px;
 	letter-spacing: .14em;
+}
+.invitation .rsvp-card .submit-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	border-radius: 10px;
+	background: #a27e59 !important;
+	border-color: #a27e59 !important;
+	font-size: 13px !important;
+	font-weight: 600 !important;
+	letter-spacing: .02em !important;
+	text-transform: none;
+}
+.invitation .rsvp-card .submit-button:hover {
+	background: #8f6c49 !important;
+	border-color: #8f6c49 !important;
+}
+.submit-button-icon {
+	display: block;
+	flex: 0 0 16px;
+	width: 16px !important;
+	height: 16px !important;
+	max-width: 16px;
+	max-height: 16px;
+	fill: none !important;
+	stroke: currentColor !important;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.8;
 }
 .submit-button:disabled { cursor: wait; opacity: .68; }
 @media(prefers-reduced-motion:reduce) {
