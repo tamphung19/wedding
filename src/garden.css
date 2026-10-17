@@ -3378,6 +3378,10 @@ img[role="button"]:focus-visible {
 	background: #8f6c49 !important;
 	border-color: #8f6c49 !important;
 }
+.invitation .rsvp-card .submit-button span {
+	margin-left: 0;
+	color: inherit !important;
+}
 .submit-button-icon {
 	display: block;
 	flex: 0 0 16px;
